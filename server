@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+
+######## Webserver in PHP ########
+# Example usage: php server 8000
+##################################
+
+<?php
+
+    use App\Class\Server;
+use App\Class\Request;
+use App\Class\Response;
+
+    # Load config's
+    require __DIR__.'/bootstrap.php';
+
+    array_shift( $argv );
+
+    if ( empty( $argv ) ) {
+        $port = 80;
+    } else {
+        $port = array_shift( $argv );
+    }
+
+    $server = new Server( '127.0.0.1', $port );
+
+    // start listening
+    $server->listen( function ( Request $request ) {
+        // print information that we recived the request
+        echo $request->getMethod().' '.$request->getUri()."\n";
+
+        // return a response containing the request information
+    return new Response( '<pre>'.print_r( $request, true ).'</pre>' );
+} );
