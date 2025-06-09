@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+
+######## Webserver in PHP ########
+#
+# Example usage: php serve 8000
+##################################
+
+<?php
+
+array_shift( $argv );
+
+if ( empty ( $argv ) ) {
+    $port = 80;
+} else {
+    $port = array_shift( $argv );
+}
+
+# Load config's
+require __DIR__.'/bootstrap.php';
+
+
+
